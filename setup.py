@@ -8,7 +8,7 @@ REQUIRED_PACKAGES = [
 ]
 
 setuptools.setup(
-    name="deepctr",
+    name="deepctr-zp",
     version="0.8.0",
     author="Weichen Shen",
     author_email="wcshen1994@163.com",
