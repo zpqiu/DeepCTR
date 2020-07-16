@@ -12,7 +12,7 @@ from itertools import chain
 from tensorflow.python.keras.layers import Embedding
 from tensorflow.python.keras.regularizers import l2
 
-from . import feature_column as fc_lib
+# from . import feature_column as fc_lib
 from .layers.sequence import SequencePoolingLayer, WeightedSequenceLayer
 from .layers.utils import Hash
 
@@ -63,9 +63,9 @@ def get_embedding_vec_list(embedding_dict, input_dict, sparse_feature_columns, r
 
 def create_embedding_matrix(feature_columns, l2_reg, seed, prefix="", seq_mask_zero=True):
     sparse_feature_columns = list(
-        filter(lambda x: isinstance(x, fc_lib.SparseFeat), feature_columns)) if feature_columns else []
+        filter(lambda x: type(x).__name__ == "SparseFeat", feature_columns)) if feature_columns else []
     varlen_sparse_feature_columns = list(
-        filter(lambda x: isinstance(x, fc_lib.VarLenSparseFeat), feature_columns)) if feature_columns else []
+        filter(lambda x: type(x).__name__ == "VarLenSparseFeat", feature_columns)) if feature_columns else []
     sparse_emb_dict = create_embedding_dict(sparse_feature_columns, varlen_sparse_feature_columns, seed,
                                             l2_reg, prefix=prefix + 'sparse', seq_mask_zero=seq_mask_zero)
     return sparse_emb_dict
@@ -133,7 +133,7 @@ def get_varlen_pooling_list(embedding_dict, features, varlen_sparse_feature_colu
 
 def get_dense_input(features, feature_columns):
     dense_feature_columns = list(
-        filter(lambda x: isinstance(x, fc_lib.DenseFeat), feature_columns)) if feature_columns else []
+        filter(lambda x: type(x).__name__ == "DenseFeat", feature_columns)) if feature_columns else []
     dense_input_list = []
     for fc in dense_feature_columns:
         dense_input_list.append(features[fc.name])
