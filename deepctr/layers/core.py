@@ -5,8 +5,12 @@ Author:
     Weichen Shen,wcshen1994@163.com
 
 """
+from collections import defaultdict
+
+from tensorflow.python.ops.gen_math_ops import log
 
 import tensorflow as tf
+from tensorflow.keras import layers
 from tensorflow.python.keras import backend as K
 from tensorflow.python.keras.initializers import Zeros, glorot_normal
 from tensorflow.python.keras.layers import Layer
